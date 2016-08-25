@@ -15,15 +15,14 @@
         </a>
         
         <div class="right menu">
-            <a class="item">
-            Login
-            </a>
-            <a class="item">
-            Sign Up
-            </a>
-            <a class="item">
-            Logout
-            </a>
+            <% if(!currentUser){ %>
+                
+                <a class="item" href="/login">Login</a>
+                <a class="item" href="/register">Sign Up</a>
+            <% } else { %>
+                <div class="item">Welocome back &nbsp; <a href="" style="color:red;"><%= currentUser.username %></a></div>
+                <a class="item" href="/logout">Logout</a>
+            <% } %>
         </div>
     </div>
 

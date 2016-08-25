@@ -1,12 +1,17 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var mongoose = require("mongoose");
-var Camp = require("./models/camp");
-var Comment = require("./models/comment");
-var seedDB = require("./seeds");
+var express         = require('express'),
+    app             = express(),
+    bodyParser      = require('body-parser'),
+    mongoose        = require("mongoose"),
+    passport        = require("passport"),
+    localStrategy   = require("passport-local"),
+    Camp            = require("./models/camp"),
+    Comment         = require("./models/comment"),
+    User            = require("./models/user"),
+    seedDB          = require("./seeds");
 
-
+var campRoutes      = require("./routes/camps"),
+    commentRoutes   = require("./routes/comments"),
+    indexRoutes     = require("./routes/index");
 
 mongoose.connect("mongodb://qeymax2:sallam2100@ds029675.mlab.com:29675/myawesomeyelpcamp");
 
@@ -16,84 +21,33 @@ app.use(express.static(__dirname + '/public'));
 app.set("view engine", "ejs");
 
 seedDB();  
+
+
+//Passport config
+app.use(require("express-session")({
+    secret: "this is the secret !!",
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+//---------------------
+
+
+app.use(function (req, res, next) {
+    res.locals.currentUser = req.user;
+    next();
+});
     
-app.get("/", function (req, res) {
-    res.render("home");
-});
-
-app.get("/camps", function (req, res) {
-    Camp.find({},function (err, camps) {
-        if (err) {
-            sconsole.log(err);
-        } else {
-            res.render("camps/index", { camps: camps });
-        }
-    })
-    
-    
-});
-
-app.post("/camps", function (req, res) {
-    var name = req.body.name;
-    var image = req.body.image;
-    var des = req.body.description;
-    Camp.create({
-    name: name,
-    image: image,
-    description : des
-    }, function (err, camp) {
-    if (err) {
-        console.log(err);
-    } else {
-        res.redirect("/camps");
-    }
-    });
-    
-});
-
-app.get("/camps/new", function (req, res) {
-    res.render("camps/new");
-});
-
-app.get("/camps/:id", function (req, res) {
-    Camp.findById(req.params.id).populate("comments").exec(function (err, camp) {
-        if (err) {
-            console.log(err);
-        } else {
-            res.render("camps/show", { camp: camp });
-        }
-    });
-});
+//use routes
+app.use(campRoutes);
+app.use(commentRoutes);
+app.use(indexRoutes);
 
 
-
-
-//------------------------
-
-
-app.get("/camps/:id/comments/new", function (req, res) {
-    Camp.findById(req.params.id, function (err, camp) {
-        res.render("comments/new.ejs" , {camp : camp});
-    }); 
-});
-
-app.post("/camps/:id/comments", function (req, res) {
-    Camp.findById(req.params.id, function (err, camp) {
-        if (err) {
-            
-        } else {
-            Comment.create(req.body.comment, function (err, comment) {
-                if (err) {
-                    
-                } else {
-                    camp.comments.push(comment);
-                    camp.save();
-                    res.redirect("/camps/" + camp._id);
-                }
-            });
-        }
-    }); 
-});
 
 app.listen(3000, function () {
     console.log("started");
