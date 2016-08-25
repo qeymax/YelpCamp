@@ -18,6 +18,9 @@ router.post("/camps/:id/comments",isLoggedIn, function (req, res) {
                 if (err) {
                     
                 } else {
+                    comment.author.id = req.user._id;
+                    comment.author.username = req.user.username;
+                    comment.save();
                     camp.comments.push(comment);
                     camp.save();
                     res.redirect("/camps/" + camp._id);

@@ -3,7 +3,7 @@
 <div class="ui container show">
     <div class="ui grid">
         <div class="four wide column">
-            <h2 class="ui header">Yelp Camp</h2>
+            <h2 class="ui header">YelpCamp</h2>
             <div class="ui menu vertical">
                 <a href="" class="item">slot</a>
                 <a href="" class="item">slot</a>
@@ -25,6 +25,9 @@
                     <div class="row par">
                         <p><%= camp.description %></p>
                     </div>
+                    <div class="row par">
+                        <p><em>Submitted By <%= camp.author.username %></em></p>
+                    </div>
                 </div>
             </div>
             <div class="ui segment">
@@ -38,7 +41,7 @@
                 <% camp.comments.forEach(function(comment){ %>
                     <div class="ui stacked segment">
                         <span style="float:right;">2010 , May</span> 
-                        <p ><strong ><%= comment.author %></strong></p>
+                        <p ><strong ><%= comment.author.username %></strong></p>
                         <p >
                             <%= comment.text %>
                         </p>    
