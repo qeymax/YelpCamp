@@ -1,0 +1,26 @@
+<% include ../partials/header %>
+    <div class="campshead">
+        <div class="ui container">
+            <h1>This is the camps page</h1>
+            <p>View our varaity of stupid camps !!</p>
+            <br>
+            <a class="ui button" href="/camps/new">New Camp</a>
+        </div>
+    </div>
+    <div class="ui container">
+        <div class="ui centered cards">
+            <% camps.forEach(function(camp){ %>
+                <div class="ui card">
+                    <div class="image" >
+                        <img src="<%= camp.image %>" style="height:250px;">
+                    </div>
+                    <div class="content" style="text-align:center;">
+                        <a class="header" href="/camps/<%= camp._id %>">
+                            <%= camp.name %>
+                        </a>
+                    </div>
+                </div>
+                <% }); %>
+        </div>
+    </div>
+<% include ../partials/footer %>

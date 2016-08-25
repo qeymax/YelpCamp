@@ -1,0 +1,53 @@
+<% include /partials/header %>
+
+<div class="ui container show">
+    <div class="ui grid">
+        <div class="four wide column">
+            <h2 class="ui header">Yelp Camp</h2>
+            <div class="ui menu vertical">
+                <a href="" class="item">slot</a>
+                <a href="" class="item">slot</a>
+                <a href="" class="item">slot</a>
+            </div>
+        </div>
+        <div class="ten wide column">
+            <div class="ui segment">
+                <img class="campPic" src="<%= camp.image %>">
+                <div class="ui grid caption">
+                    <div class="row name">
+                        <div class="eight wide left aligned column">
+                            <h4><a href=""><%= camp.name %></a></h4>
+                        </div>
+                        <div class="right floated right aligned eight wide column">
+                            <h4 class="">9$/night</h4>
+                        </div>
+                    </div>
+                    <div class="row par">
+                        <p><%= camp.description %></p>
+                    </div>
+                </div>
+            </div>
+            <div class="ui segment">
+                <div class="ui grid">
+                    <div class="row">
+                        <div class="right floated right aligned ten wide column column">
+                            <a class="ui button" href="/camps/<%= camp._id %>/comments/new">New Comment</a>
+                        </div>
+                    </div>
+                </div>  
+                <% camp.comments.forEach(function(comment){ %>
+                    <div class="ui stacked segment">
+                        <span style="float:right;">2010 , May</span> 
+                        <p ><strong ><%= comment.author %></strong></p>
+                        <p >
+                            <%= comment.text %>
+                        </p>    
+                    </div>    
+                <% }) %>
+                    
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include /partials/footer %>
