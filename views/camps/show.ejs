@@ -22,12 +22,20 @@
                             <h4 class="">9$/night</h4>
                         </div>
                     </div>
-                    <div class="row par">
+                    <div class="row name par">
                         <p><%= camp.description %></p>
                     </div>
                     <div class="row par">
                         <p><em>Submitted By <%= camp.author.username %></em></p>
                     </div>
+                    <% if (currentUser && camp.author.id.equals(currentUser._id)) { %>
+                        <div class="row par editbutton">
+                            <a class="ui button orange mini" href="/camps/<%= camp._id %>/edit">Edit</a>
+                            <form action="/camps/<%= camp._id %>?_method=DELETE" method="POST" >
+                                <button class="ui button red mini">Delete</button>
+                            </form>
+                        </div>
+                    <% } %>
                 </div>
             </div>
             <div class="ui segment">
@@ -44,7 +52,13 @@
                         <p ><strong ><%= comment.author.username %></strong></p>
                         <p >
                             <%= comment.text %>
-                        </p>    
+                        </p>
+                        <% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
+                            <a class="ui button orange mini" href="/camps/<%= camp._id %>/comments/<%= comment._id %>/edit">Edit</a>
+                            <form style="display:inline;" action="/camps/<%= camp._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST" >
+                                <button class="ui button red mini">Delete</button>
+                            </form>
+                        <% } %>
                     </div>    
                 <% }) %>
                     

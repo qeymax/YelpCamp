@@ -1,0 +1,26 @@
+<% include ../partials/header %>
+<div class="campshead">
+    <div class="ui container">
+        <h1>Edit <%= camp.name %></h1>
+        <br>
+        <br>
+        <br>
+        <br>
+        <a href="/camps/<%= camp._id %>">back</a>
+    </div>
+</div>
+<div class="ui text container">
+<form class="ui centered form" action="/camps/<%= camp._id %>?_method=PUT" method="POST">
+  <div class="field">
+    <input type="text" name="camp[name]" value="<%= camp.name %>">
+  </div>
+  <div class="field">
+    <input type="text" name="camp[image]" value="<%= camp.image %>">
+  </div>
+  <div class="field">
+    <input type="text" name="camp[description]" value="<%= camp.description %>">
+  </div>
+  <button class="ui button fluid" type="submit">Submit</button>
+</form>
+</div>
+<% include ../partials/footer %> 

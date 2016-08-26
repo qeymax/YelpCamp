@@ -26,7 +26,17 @@
         </div>
     </div>
 
-
+    <% if(error && error.length > 0){ %>
+        <div class="ui container">
+            <div class="ui negative floating message"><%= error %></div>
+        </div>
+    <% } else if(success && success.length > 0) { %>
+        <div class="ui container">
+            <div class="ui success floating message"><%= success %></div>
+        </div>
+    <% } %>
+    
+    
      <!--<div class="item">
         <div class="ui transparent icon input " >
             <input type="text" placeholder="Search..." style="color : white;">
