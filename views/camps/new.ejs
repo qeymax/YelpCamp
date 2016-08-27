@@ -1,5 +1,5 @@
 <% include ../partials/header %>
-<div class="campshead">
+  <div class="campshead">
     <div class="ui container">
         <h1>Add a new Camp</h1>
         <br>
@@ -8,19 +8,19 @@
         <br>
         <a href="/camps">back</a>
     </div>
-</div>
+  </div>
 <div class="ui text container">
-<form class="ui centered form" action="/camps" method="POST">
-  <div class="field">
-    <input type="text" name="name" placeholder="Name">
-  </div>
-  <div class="field">
-    <input type="text" name="image" placeholder="Image Url">
-  </div>
-  <div class="field">
-    <input type="text" name="description" placeholder="Description">
-  </div>
-  <button class="ui button fluid" type="submit">Submit</button>
-</form>
+  <form class="ui centered form" action="/camps" method="POST">
+    <div class="field">
+      <input type="text" name="name" placeholder="Name">
+    </div>
+    <div class="field">
+      <input type="text" name="image" placeholder="Image Url">
+    </div>
+    <div class="field">
+      <textarea type="text" name="camp[description]" placeholder="Description"></textarea>
+    </div>
+    <button class="ui button fluid" type="submit">Submit</button>
+  </form>
 </div>
 <% include ../partials/footer %> 

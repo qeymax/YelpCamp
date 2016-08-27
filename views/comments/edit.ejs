@@ -2,7 +2,7 @@
 
 <div class="campshead">
     <div class="ui container">
-        <h1></h1>
+        <h1>Edit a Comment</h1>
         <br>
         <br>
         <br>
@@ -14,7 +14,7 @@
 <div class="ui text container">
   <form class="ui centered form" action="/camps/<%= camp_id%>/comments/<%= comment._id %>?_method=PUT" method="POST">
     <div class="field">
-      <input type="text" name="comment[text]" value="<%= comment.text %>">
+      <textarea type="text" name="comment[text]"><%= comment.text %></textarea>
     </div>
     <button class="ui button fluid" type="submit">Submit</button>
   </form>
