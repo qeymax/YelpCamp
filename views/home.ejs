@@ -1,5 +1,50 @@
-<% include /partials/header %>
-  <h1>Home</h1>
-  <p>welcome to YepCamp</p>
-  <a href="/camps">View Camps</a>
-<% include /partials/footer %> 
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css">
+        <link href="/css/home_style.css" rel="stylesheet">
+    </head>
+
+    <body>
+    
+        <div class="ui fixed inverted blue secondary menu">
+            <a class="item" href="/">YelpCamp</a>
+        
+            <div class="right menu">
+                <% if(!currentUser){ %>
+                    <a class="item" href="/login">Login</a>
+                    <a class="item" href="/register">Sign Up</a>
+                <% } else { %>
+                    <div class="item">Welocome back &nbsp; <a href="" style="color:red;"><%= currentUser.username %></a></div>
+                    <a class="item" href="/logout">Logout</a>
+                <% } %>
+            </div>
+        </div>
+
+        <% if(error && error.length > 0){ %>
+            <div class="ui container">
+              <div class="ui negative floating message"><%= error %></div>
+            </div>
+        <% } else if(success && success.length > 0) { %>
+            <div class="ui container">
+                <div class="ui success floating message"><%= success %></div>
+            </div>
+        <% } %>
+        
+        <div class="home"></div>
+        <h1 class="ui header center aligned">
+            Welcome to YelpCamp !
+            <div class="sub header">Search through a varaity of Campground.</div>
+            <a class="ui button huge blue center floated" href="/camps">Get Started</a>
+        </h1>
+        
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.1/semantic.min.js"></script>
+        <script src="/jquery-bgswitcher-master/jquery.bgswitcher.js"></script>
+        <script src="/home_script.js"></script>
+    </body>
+</html>

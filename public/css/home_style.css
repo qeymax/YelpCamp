@@ -1,0 +1,14 @@
+body{
+    padding-top: 50vh;
+    background-image: url("../images/home/background-1.jpg");
+    background-repeat: no-repeat;
+    background-size:     cover;
+}
+h1{
+    font-size: 72px !important;
+    color:white !important;
+    transform: translateY(-50%);
+}
+.sub.header{
+    color:white !important;
+}

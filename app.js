@@ -15,7 +15,8 @@ var campRoutes      = require("./routes/camps"),
     commentRoutes   = require("./routes/comments"),
     indexRoutes     = require("./routes/index");
 
-mongoose.connect("mongodb://qeymax2:sallam2100@ds029675.mlab.com:29675/myawesomeyelpcamp");
+url = process.env.DATABASEURL || "mongodb://qeymax2:sallam2100@ds029675.mlab.com:29675/myawesomeyelpcamp";
+mongoose.connect(url);
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -55,6 +56,6 @@ app.use(indexRoutes);
 
 
 
-app.listen(3000, function () {
-    console.log("started");
+app.listen(process.env.PORT || 3000 , process.env.IP, function () {
+    console.log("server started");
 });
